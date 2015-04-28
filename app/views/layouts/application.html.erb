@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Flutter</title>
+  <title>Flutter!</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'About', about_path %>
 </head>
 <body>
 
+  <header>
+    <div>
+      <span>Flutter like a Butterfly!</span>
+    </div>
+  </header>
+ 
 <%= yield %>
+
+ <footer id="footer" align="center">
+          <em>
+            Copyright &copy; 2015 CBS VI 360
+          </em>
+      </footer>
 
 </body>
 </html>
