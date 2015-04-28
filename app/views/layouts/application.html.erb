@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Flutter!</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <%= link_to 'Home', root_path %>
-  <%= link_to 'About', about_path %>
-</head>
-<body>
+  <head>
+    <title>Flutter </title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
-  <header>
-    <div>
-      <span>Flutter like a Butterfly!</span>
+    <header class="nav nav-tabs">
+      <div class="container">
+        <nav>  
+          <ul class="nav nav-tabs">
+            <li><%= link_to 'Home', root_path %></li>    
+            <li><%= link_to 'About', about_path %></li>
+
+              <div class="pull-right user-info">
+                <% if current_user %>
+                Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+                <% else %>
+                <%= link_to "Sign In", new_user_session_path %> or
+                <%= link_to "Sign Up", new_user_registration_path %>
+                <% end %>
+              </div>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  </head>
+  <body>
+  
+    <div class="container">
+
+      <%= yield %>
     </div>
-  </header>
- 
-<%= yield %>
 
- <footer id="footer" align="center">
-          <em>
-            Copyright &copy; 2015 CBS VI 360
-          </em>
-      </footer>
 
-</body>
+    <footer id="footer" align="center">
+      <em>
+        Copyright &copy; 2015 CBS VI 360
+      </em>
+    </footer>
+
+  </body>
 </html>
