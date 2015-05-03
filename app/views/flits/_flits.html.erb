@@ -1,0 +1,8 @@
+<li id="flit-<%= flit.id %>">
+  <%= link_to gravatar_for(flit.user, size: 50), flit.user %>
+  <span class="user"><%= link_to flit.user.name, flit.user %></span>
+  <span class="content"><%= flit.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(flit.created_at) %> ago.
+  </span>
+</li>

@@ -1,0 +1,2 @@
+class FlitsController < ApplicationController
+end
