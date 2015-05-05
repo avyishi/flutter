@@ -6,5 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @flits = @user.flits.paginate(page: params[:page])
   end
 end
