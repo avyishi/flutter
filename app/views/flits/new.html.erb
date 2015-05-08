@@ -1,0 +1,7 @@
+<%= form_for(@flit) do |f| %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "New flit..." %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-info" %>
+<% end %>
+

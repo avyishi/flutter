@@ -1,0 +1,8 @@
+<h1>Flits</h1>
+
+<% @flit.each do |flit| %> 
+  <div>
+    <%= link_to flit.content, flit %>
+    <%= link_to 'Remove', flit, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div> 
+<% end %>

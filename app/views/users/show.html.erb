@@ -1,9 +1,17 @@
 <h1>User Details</h1>
-<table style="width=100%">
-  <tr>
-    <td><%= @user.name %></td> 
-    <td><%= @user.email %></td>
-</tr>
+  <table style="width=100%">
+    <tr>
+      <td><%= @user.name %></td> 
+      <td><%= @user.email %></td>
+  </tr>
+  </table>
 
-
-</table>
+  <div>
+    <% if @user.flits.any? %>
+      <h3>Flits (<%= @user.flits.count %>)</h3>
+      <ol>
+        <%= render @flits %>
+      </ol>
+      <%= will_paginate @flits %>
+    <% end %>
+  </div>
