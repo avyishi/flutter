@@ -16,6 +16,13 @@ class FlitsController < ApplicationController
   end
 
   def destroy
+    @flit = Flit.find(params[:id])
+
+    if @flit.destroy
+       redirect_to @flit
+     else
+       render root_url
+     end
   end
 
   def index
