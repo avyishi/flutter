@@ -1,8 +1,17 @@
-<h1>Flits</h1>
+<h1>Flutter Stream <%= form_tag flits_path, :method => 'get' do %>
+  <% end %>
+</h1>
 
+<table>
 <% @flit.each do |flit| %> 
-  <div>
-    <%= link_to flit.content, flit %>
-    <%= link_to 'Remove', flit, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div> 
+  <tr>
+
+    <td><%= flit.content %></td>
+    <td><%= link_to 'Delete', flit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
 <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New Flit', new_flit_path %>

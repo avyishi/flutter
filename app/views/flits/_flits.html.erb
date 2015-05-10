@@ -1,8 +1,21 @@
-<li id="flit-<%= flit.id %>">
-  <%= link_to gravatar_for(flit.user, size: 50), flit.user %>
-  <span class="user"><%= link_to flit.user.name, flit.user %></span>
-  <span class="content"><%= flit.content %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(flit.created_at) %> ago.
-  </span>
-</li>
+<%= form_for(@flit) do |f| %>
+  <% if @flit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@flit.errors.count, "error") %> prohibited this flit from being saved:</h2>
+
+      <ul>
+      <% @flit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Enter new flit..." %>
+  </div>
+
+  <div class="actions">
+
+  <%= f.submit "Post", class: "btn btn-info" %>
+<% end %>
