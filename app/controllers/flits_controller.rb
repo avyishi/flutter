@@ -1,18 +1,24 @@
 class FlitsController < ApplicationController
- 
+  def index
+    @flit = Flit.all
+  end
 
-  def create
-  @flit = current_user.flits.build(flit_params)
-    if @flit.save
-      flash[:success] = "Flit created!"
-      redirect_to root_url
-    else
-      render 'static_pages/home'
-    end
+  def show
+    @flit = Flit.find(params[:id])
   end
 
   def new
     @flit = Flit.new
+  end
+
+  def create
+    @flit = Flit.new(flit_params)
+    @flit.user = current_user
+      if @flit.save
+        redirect_to flits_path
+      else
+        render 'static_pages/home'
+      end
   end
 
   def destroy
@@ -25,17 +31,9 @@ class FlitsController < ApplicationController
      end
   end
 
-  def index
-    @flit = Flit.all
-  end
-
-  def show
-    @flit = Flit.find(params[:id])
-  end
-
   private
 
-    def flit_params
-      params.require(:flit).permit(:content)
-    end
+  def flit_params
+    params.require(:flit).permit(:content)
+  end
 end
