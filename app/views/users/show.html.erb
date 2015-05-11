@@ -1,4 +1,9 @@
 <h1>User Details</h1>
+
+<%= image_tag @user.image.url %>
+<%= image_tag @user.image.url(:medium) %>
+<%= image_tag @user.image.url(:thumb) %>
+
   <table style="width=100%">
     <tr>
       <td><%= @user.name %></td> 
