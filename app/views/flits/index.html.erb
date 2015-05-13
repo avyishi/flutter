@@ -1,11 +1,10 @@
 <h1>Flutter Stream <%= form_tag flits_path, :method => 'get' do %>
-  <% end %>
+<% end %>
 </h1>
 
 <table>
 <% @flit.each do |flit| %> 
   <tr>
-
     <td><%= flit.content %></td>
     <td><%= link_to 'Delete', flit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
