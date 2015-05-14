@@ -1,8 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-html {
-  background: #FFFFFF;
+html, body {
+  background: #2a2a2a;
   margin:0;
   padding:0;
   height:100%;
@@ -14,6 +14,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 2;
+  color: #fff;
 }
 
 h1 {
@@ -21,6 +22,7 @@ h1 {
   letter-spacing: -4px;
   margin-bottom: 20px;
   text-align: center;
+  color: #fff;
 }
 
 h2 {
@@ -29,12 +31,12 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #333;
 }
 
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  color: #ffffff;
 }
 
 .center {
@@ -44,6 +46,17 @@ p {
   }
 }
 
+a {
+  color: #ffffff;
+}
+
+a:hover {
+    color: #b19cd9;
+}
+
+div {
+  color: #ffffff;
+}
 
 #session_remember_me {
   width: auto;
@@ -54,8 +67,20 @@ table, th, td {
     border: 0px solid black;
     border-collapse: collapse;
 }
+
 th, td {
     padding: 5px;
+}
+
+.btn-purple {
+  background: #b19cd9;
+  border-color: #b19cd9;
+   
+}
+
+.btn-purple:hover {
+  background: #CC99CC;
+  border-color: #CC99CC;
 }
 
 footer {

@@ -1,15 +1,15 @@
 <div style="background:transparent !important" class="jumbotron">
   <div id="content">
   <h1>
-    <span style="color: #33CCFF;">Flutter</span>
+    <span style="color: #b19cd9;">Flutter</span>
   </h1>
   <h4 align="center">Twitter Clone!</h4>
   <p align="center">
     <%- if user_signed_in? %>
       <%= link_to "Sign Out", destroy_user_session_path, method: 'delete' %>
     <% else %>
-      <%= link_to "Sign In", new_user_session_path, class: 'btn btn-info :hover'  %>
-      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-info :hover' %>
+      <%= link_to "Sign In", new_user_session_path, class: 'btn btn-purple :hover'  %>
+      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-purple :hover' %>
     <% end %>
   </p>
   </div>
