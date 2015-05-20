@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+   before_action :authenticate_user!
 
   def index
     @users = User.all
@@ -12,16 +13,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @flits = @user.flits.paginate(page: params[:page])
   end
-
-  def update
-    if user.save
-      sign_in_and_redirect user, :event => :authentication
-    else
-      session["devise.facebook_data"] = env["omniauth.auth"]
-      redirect_to new_user_registration_url
-    end
-
-  end
+def update
+     if current_user.update_attributes(user_params)
+       flash[:notice] = "User information updated"
+       redirect_to edit_user_registration_path
+     else
+       render "devise/registrations/edit"
+     end
+   end
 
 private
   

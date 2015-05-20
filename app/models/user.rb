@@ -7,31 +7,25 @@ class User < ActiveRecord::Base
   
   has_many :flits, dependent: :destroy
   validates :password, length: { minimum: 6 }
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  has_attached_file :image
 
   has_many :flits
 
-  def self.find_for_facebook_oauth(omniauth)
-    if user = User.find_by_email(omniauth.info.email)
-      if omniauth.info.image.present?
-        user.update_attribute(:image, omniauth.info.image)
-      end
-      user
-      else # Create a user with a stub password. 
-        User.create!(:email => omniauth.info.email,
-                  :name => omniauth.info.name,
-                  :image => omniauth.info.image,
-                  :password => Devise.friendly_token[0,20])
+   def self.from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name   # assuming the user model has a name
+        user.image = auth.info.image # assuming the user model has an image
       end
     end
+
     def self.new_with_session(params, session)
       super.tap do |user|
-        if omniauth = session["devise.facebook_data"]
-          user.email = omniauth.info.email
-          user.name = omniauth.info.name
-          user.image = omniauth.info.image
+        if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+          user.email = data["email"] if user.email.blank?
         end
       end
     end
+
   end
