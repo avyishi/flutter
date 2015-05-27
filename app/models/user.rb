@@ -10,9 +10,7 @@ class User < ActiveRecord::Base
   has_attached_file :image
 
   has_many :flits
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_keys: "follower_id",
-                                  dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship",dependent: :destroy
 
    def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
