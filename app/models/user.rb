@@ -10,8 +10,17 @@ class User < ActiveRecord::Base
   has_attached_file :image
 
   has_many :flits
-  has_many :active_relationships, class_name: "Relationship",dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
 
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+ 
    def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.info.email
@@ -27,6 +36,18 @@ class User < ActiveRecord::Base
           user.email = data["email"] if user.email.blank?
         end
       end
+    end
+
+    def follow(other_user)
+      active_relationships.create(followed_id: other_user.id)
+    end
+  
+    def unfollow(other_user)
+      active_relationships.find_by(followed_id: other_user.id).destroy
+    end
+
+    def following?(other_user)
+      following.include?(other_user)
     end
 
   end

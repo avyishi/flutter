@@ -6,6 +6,7 @@
   <h4 align="center">Twitter Clone!</h4>
   <p align="center">
     <%- if user_signed_in? %>
+
       <%= link_to "Sign Out", destroy_user_session_path, method: 'delete' %>
     <% else %>
       <%= link_to "Sign In", new_user_session_path, class: 'btn btn-purple :hover'  %>
@@ -13,4 +14,7 @@
     <% end %>
   </p>
   </div>
+   <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
 </div>

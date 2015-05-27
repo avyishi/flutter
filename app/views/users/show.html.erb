@@ -6,8 +6,12 @@
       <td><%= @user.email %></td>
   </tr>
   </table>
+  <section class="stats">
+    <%= render 'shared/stats' %>
+  </section>
 
   <div>
+    <%= render 'follow_form' %>
     <% if @user.flits.any? %>
       <h3>Flits (<%= @user.flits.count %>)</h3>
       <ol>

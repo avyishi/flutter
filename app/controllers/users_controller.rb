@@ -13,7 +13,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @flits = @user.flits.paginate(page: params[:page])
   end
-def update
+  
+  def update
      if current_user.update_attributes(user_params)
        flash[:notice] = "User information updated"
        redirect_to edit_user_registration_path
@@ -21,6 +22,20 @@ def update
        render "devise/registrations/edit"
      end
    end
+
+   def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
 private
   
